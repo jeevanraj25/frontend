@@ -1,8 +1,11 @@
 import React from 'react'
+import Dashboard from './pages/dashboard'
 
 const App = () => {
   return (
-    <div className='text-2xl'>App</div>
+    <div>
+      <Dashboard />
+    </div>
   )
 }
 
