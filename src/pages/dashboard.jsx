@@ -5,12 +5,13 @@ import { FaAngleDoubleRight,FaBell } from "react-icons/fa";
 // import Analytics from "./analytics";
 // import Assignment from "./Assignments/Assignment";
 import { Avatar} from 'antd';
+import BatchWiseAnalytics from "../components/dashboard/batchWiseAnalytics";
 // import logo from "../assets/image/logo.svg";
 
 
 
 export default function Dashboard(){
-    const [showCard, setShowCard] = useState("Analytics");
+    const [showCard, setShowCard] = useState("Dashboard");
     const [showSideBar, setShowSideBar] = useState(true);
 
     return(
@@ -26,8 +27,8 @@ export default function Dashboard(){
           <button onClick={()=>{setShowSideBar(!showSideBar)}} className={`fixed ${showSideBar?"hidden":""} top-4 left-3`}><FaAngleDoubleRight className="ml-auto text-2xl"/></button>
             <Sidebar showSideBar={showSideBar} setShowSideBar={setShowSideBar} showCard={showCard} setShowCard={setShowCard} className="bg-white"/>
             <div className="w-full  px-5 py-10">
-              <div className={showCard=="Analytics"?"":"hidden "}>
-                {/* <Analytics/> */}
+              <div className={showCard=="Dashboard"?"":"hidden "}>
+                <BatchWiseAnalytics />
               </div>
               <div className={showCard=="Assessments"?"":"hidden "}>
                 {/* <Assessments setShowSideBar={setShowSideBar}/> */}
