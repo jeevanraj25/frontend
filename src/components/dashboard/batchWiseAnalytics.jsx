@@ -32,7 +32,7 @@ const BatchWiseAnalytics = () => {
       <div className='flex p-5 w-fit h-auto border rounded-md shadow-lg'>
         <div className='flex flex-col items-center justify-center'>
           <h1 className='font-bold text-4xl'>Basic Analytics</h1>
-          <div className='flex justify-center items-center w-[50vw] h-[50vh] px-7 py-5 my-5 border-2 rounded-lg'>
+          <div className='flex justify-center items-center w-[50vw] min-h-[50vh] h-max px-7 py-5 my-5 border-2 rounded-lg'>
             {/* Conditionally render LineGraphs if batchWiseData exists */}
             {Object.keys(batchWiseData).length > 0 && (
               <LineGraphs batchWiseData={batchWiseData} />

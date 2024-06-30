@@ -6,7 +6,7 @@ import { FaAngleDoubleRight,FaBell } from "react-icons/fa";
 // import Assignment from "./Assignments/Assignment";
 import { Avatar} from 'antd';
 import BatchWiseAnalytics from "../components/dashboard/batchWiseAnalytics";
-// import logo from "../assets/image/logo.svg";
+
 
 
 
@@ -18,7 +18,6 @@ export default function Dashboard(){
         <>
           <div className="bg-white lg:pl-[20%] w-full lg:block">
           <div className="px-4 lg:pr-8 w-auto flex justify-between pt-4 items-center">
-            {/* <img src={logo} className="translate-x-6 lg:translate-x-0" alt="" /> */}
             <div className="flex gap-3">
 
             </div>
