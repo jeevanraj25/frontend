@@ -17,15 +17,9 @@ export default function Dashboard(){
     return(
         <>
           <div className="bg-white lg:pl-[20%] w-full lg:block">
-          <div className="px-4 lg:pr-8 w-auto flex justify-between pt-4 items-center">
-            <div className="flex gap-3">
-
-            </div>
-
-          </div>
           <button onClick={()=>{setShowSideBar(!showSideBar)}} className={`fixed ${showSideBar?"hidden":""} top-4 left-3`}><FaAngleDoubleRight className="ml-auto text-2xl"/></button>
             <Sidebar showSideBar={showSideBar} setShowSideBar={setShowSideBar} showCard={showCard} setShowCard={setShowCard} className="bg-white"/>
-            <div className="w-full  px-5 py-10">
+            <div className="w-full  p-5">
               <div className={showCard=="Dashboard"?"":"hidden "}>
                 <BatchWiseAnalytics />
               </div>
