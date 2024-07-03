@@ -5,6 +5,7 @@ import TotalStudents from "./totalStudents";
 import TopPerfromers from "./topPerfromers";
 import WelcomeCard from "./welcomeCard";
 import TotalBatches from "./totalBatches";
+import Loading from "../loading/Loading";
 
 const BatchWiseAnalytics = () => {
   const [batchWiseData, setBatchWiseData] = useState({});
@@ -12,21 +13,22 @@ const BatchWiseAnalytics = () => {
   const [topPerformers, setTopPerformers] = useState([]);
   const [totalBatch, setTotalBatch] = useState(0)
   const [universityName,setUniversityName] =useState("");
-  
+  const [loading, setLoading] = useState(false)
 
   const loadData = async () => {
     try {
+      setLoading(true)
       const bacthData = await axios.get("/trainer");
       const totalStudends = await axios.get("/trainer/studentTotal");
       const topPerformer = await axios.get("/trainer/topPerformers");
-       const universityname =await axios.get("/trainer/universityname");
-      const  arr  = bacthData.data
+      const universityname =await axios.get("/trainer/universityname");
+      setLoading(false)
+
       setBatchWiseData(bacthData.data);
       setTotalStudent(totalStudends.data.total);
       setTopPerformers(topPerformer.data);
       setTotalBatch(bacthData.data.assessmentsArray[0].labels.length)
-      console.log(arr.assessmentsArray[0].labels);
-       setUniversityName(universityname.data.data);
+      setUniversityName(universityname.data.data);
     } catch (err) {
       console.error("Error fetching data:", err);
     }
@@ -40,20 +42,22 @@ const BatchWiseAnalytics = () => {
 
   return (
       <div className="p-5 flex flex-col justify-center items-center">
-        <div className="flex flex-1 w-[68vw]  py-2 mx-auto my-4">
+        {loading? <Loading /> : (
+          <>
+        <div className="flex flex-1 w-[90%]  py-2 mx-auto my-4">
           <WelcomeCard universityName = {universityName} trainerName={"Trainer Name"}/>
         </div>
-        <div className="flex flex-1 p-5 w-[68vw] h-auto border rounded-md shadow-lg mx-auto">
-          <div className="flex flex-col items-center justify-center">
-            <h1 className="font-bold text-4xl">Basic Analytics</h1>
-            <div className="flex justify-center items-center w-[45vw] h-[48vh] px-5 py-5 my-5 border-2 rounded-lg">
+        <div className="flex flex-1 p-5 w-[90%] h-auto border rounded-md shadow-lg mx-auto">
+          <div className="flex flex-col w-[68%] h-auto items-center justify-center mx-auto">
+            <h1 className="font-bold text-4xl">Batch Analytics</h1>
+            <div className="flex justify-center items-center w-full h-full px-5 py-5 my-5 border-2 rounded-lg">
               {/* Conditionally render LineGraphs if batchWiseData exists */}
               {Object.keys(batchWiseData).length > 0 && (
                 <LineGraphs batchWiseData={batchWiseData} />
               )}
             </div>
           </div>
-          <div className="ml-10 px-5">
+          <div className="ml-7 px-5 w-[30%]">
             <div className="py-2">
               <TotalStudents total={totalStudent} />
             </div>
@@ -65,6 +69,8 @@ const BatchWiseAnalytics = () => {
             </div>
           </div>
         </div>
+        </>
+        )}
       </div>
   );
 };
