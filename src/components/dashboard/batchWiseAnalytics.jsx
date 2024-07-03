@@ -19,14 +19,14 @@ const BatchWiseAnalytics = () => {
       const bacthData = await axios.get("/trainer");
       const totalStudends = await axios.get("/trainer/studentTotal");
       const topPerformer = await axios.get("/trainer/topPerformers");
-      // const universityname =await axios.get("/trainer/universityname");
+       const universityname =await axios.get("/trainer/universityname");
       const  arr  = bacthData.data
       setBatchWiseData(bacthData.data);
       setTotalStudent(totalStudends.data.total);
       setTopPerformers(topPerformer.data);
       setTotalBatch(bacthData.data.assessmentsArray[0].labels.length)
       console.log(arr.assessmentsArray[0].labels);
-      // setUniversityName(universityname.data.data);
+       setUniversityName(universityname.data.data);
     } catch (err) {
       console.error("Error fetching data:", err);
     }
