@@ -12,7 +12,7 @@ import { useState } from "react";
 
 
 
-export default function Sidebar()
+export default function Sidebar({showCard, setShowCard})
 {
     
 
@@ -35,7 +35,7 @@ export default function Sidebar()
       };
     
     const [showSideBar, setShowSideBar] = useState(true)
-    const [showCard, setShowCard] = useState("Dashboard")
+
     
 
     return(

@@ -7,6 +7,7 @@ import WelcomeCard from "./welcomeCard";
 import TotalBatches from "./totalBatches";
 import Loading from "../loading/Loading";
 
+
 const BatchWiseAnalytics = () => {
   const [batchWiseData, setBatchWiseData] = useState({});
   const [totalStudent, setTotalStudent] = useState(0);
@@ -23,7 +24,6 @@ const BatchWiseAnalytics = () => {
       const topPerformer = await axios.get("/trainer/topPerformers");
       const universityname =await axios.get("/trainer/universityname");
       setLoading(false)
-
       setBatchWiseData(bacthData.data);
       setTotalStudent(totalStudends.data.total);
       setTopPerformers(topPerformer.data);
@@ -41,7 +41,7 @@ const BatchWiseAnalytics = () => {
   console.log("batchWiseData:", batchWiseData); // Log batchWiseData for debugging
 
   return (
-      <div className="p-5 flex flex-col justify-center items-center">
+      <div className="px-5 py-3 flex flex-col justify-center items-center">
         {loading? <Loading /> : (
           <>
         <div className="flex flex-1 w-[90%]  py-2 mx-auto my-4">
