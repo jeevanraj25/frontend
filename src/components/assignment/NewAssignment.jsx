@@ -50,13 +50,13 @@ const NewAssignment = ({ isOpen, setIsOpen }) => {
   }
 
   const handleClose = () => {
+	setIsValid(false)
 	setFormError({})
 	setIsOpen(false)
   }
 
   const handlePost = async () => {
 	try{
-
 		const newAssignment = {
 			title:data.title,
 			endDate:data.endDate,
@@ -67,9 +67,9 @@ const NewAssignment = ({ isOpen, setIsOpen }) => {
 		const res = await toast.promise(
 			axios.post("/trainer/assignment",newAssignment),
 			{
-			pending: 'Uploading',
-      		success: 'Uploaded Successfully',
-      		error: 'Rejected 🤯'
+				pending: 'Uploading',
+				success: 'Uploaded Successfully',
+				error: 'Rejected 🤯'
 			}
 		)
 	}
