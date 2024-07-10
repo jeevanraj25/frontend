@@ -2,31 +2,33 @@ import axios from '../../api/axios'
 import {useEffect, useState} from 'react'
 import CSVReader from 'react-csv-reader'
 import { toast } from 'react-toastify'
+import AssignmentUploadTemplate from './assignmentUploadTemplate'
 
 const NewAssignment = ({ isOpen, setIsOpen }) => {
 	const [csvData, setCsvData] = useState(null)
-	const [data, setData] = useState({
+	const initialData = {
 		title:"",
 		endDate:"",
 		type:"mcq",
-  })
-  const [formError, setFormError] = useState({})
-  const [isValid, setIsValid] = useState(false)
+	}
+	const [data, setData] = useState(initialData)
+	const [formError, setFormError] = useState({})
+	const [isValid, setIsValid] = useState(false)
+	const [showPreview, setShowPreview] = useState(false)
 
-  const handleChange = (e) => {
-	const {name,value} = e.target
-	setData({...data,[name]:value})
-	setFormError({...formError,[name]:""})
+	const handleChange = (e) => {
+		const {name,value} = e.target
+		setData({...data,[name]:value})
+		setFormError({...formError,[name]:""})
+	}
 
-  }
-
-  const handleCSV = (csv_data,fileinfo) => {
-	setFormError({...formError,["csvData"]:""})
-	if(!(fileinfo.type.includes("\csv")))
-		alert("Please upload a CSV file")
-	else
-		setCsvData(csv_data)
-  }
+	const handleCSV = (csv_data,fileinfo) => {
+		setFormError({...formError,["csvData"]:""})
+		if(!(fileinfo.type.includes("\csv")))
+			alert("Please upload a CSV file")
+		else
+			setCsvData(csv_data)
+	}	
 
   const handleValidation = (data) => {
 	const error = {}
@@ -50,8 +52,11 @@ const NewAssignment = ({ isOpen, setIsOpen }) => {
   }
 
   const handleClose = () => {
+	setData(initialData)
 	setIsValid(false)
+	setShowPreview(false)
 	setFormError({})
+	setCsvData(null)
 	setIsOpen(false)
   }
 
@@ -65,22 +70,27 @@ const NewAssignment = ({ isOpen, setIsOpen }) => {
 		}
 		console.log(newAssignment);
 		const res = await toast.promise(
-			axios.post("/trainer/assignment",newAssignment),
+			axios.post("/createAssignment",newAssignment),
 			{
 				pending: 'Uploading',
 				success: 'Uploaded Successfully',
 				error: 'Rejected 🤯'
 			}
 		)
+		handleClose()
 	}
 	catch(err){
 		console.log(err);
 	}
   }
 
+	const handlePreview = () => {
+		setShowPreview(!showPreview)
+	}
+
   useEffect(()=>{
 	if(Object.keys(formError).length===0&&isValid)
-		handlePost()
+		handlePreview()
   },[formError])
 
   if (!isOpen) return null;
@@ -89,15 +99,19 @@ const NewAssignment = ({ isOpen, setIsOpen }) => {
 	<div className="relative w-auto max-w-lg mx-auto my-6 h-[80vh]" >
 	<div className='p-3 flex justify-center items-center'>
 		<div className='p-3 flex flex-col bg-white font-semibold border-2 w-auto min-h-[50vh] h-auto rounded-lg'>
+			
+			{showPreview && <AssignmentUploadTemplate csvData = {csvData} data = {data}  />}
+			
+			<div className={`${showPreview?"hidden":""}`}>
 			<h1 className='text-2xl text-center mb-2'>Assignment Details</h1>
 			<div className='flex flex-col px-2 py-1'>
 				<label className='py-1'>Enter Assignment Title</label>
-				<input name="title" type='text' className={`p-1 border-2 rounded-lg my-1 ${formError.title?"border-red-500":""}`} placeholder='Title' value={data.batchName} onChange={handleChange} />
+				<input name="title" type='text' className={`p-1 border-2 rounded-lg my-1 ${formError.title?"border-red-500":""}`} placeholder='Title' value={data.title} onChange={handleChange} />
 				<p className='text-red-500 text-md font-semibold ml-1'>{formError.title}</p>
 			</div>
 			<div className='flex flex-col px-2 py-2'>
 				<label className='py-1'>End Date</label>
-				<input name="endDate" className={`p-1 border-2 rounded-lg my-1 ${formError.endDate?"border-red-500":""}`} type='date' value={data.startDate} onChange={handleChange} />
+				<input name="endDate" className={`p-1 border-2 rounded-lg my-1 ${formError.endDate?"border-red-500":""}`} type='date' value={data.endDate} onChange={handleChange} />
 				<p className='text-red-500 text-md font-semibold ml-1'>{formError.endDate}</p>
 			</div>
 			<div className='flex flex-col px-2 py-2'>
@@ -117,8 +131,9 @@ const NewAssignment = ({ isOpen, setIsOpen }) => {
 				<CSVReader cssClass='border' onFileLoaded={(csv_data,fileinfo) => handleCSV(csv_data,fileinfo)} />
 				<p className='text-red-500 text-md font-semibold ml-1'>{formError.csvData}</p>
 			</div>
+			</div>
 			<div className='flex flex-col px-2'>
-				<button className='px-3 py-2 my-2 bg-[#009eb0] text-white rounded-lg' onClick={handleSubmit}>Submit</button>
+				<button className='px-3 py-2 my-2 bg-[#009eb0] text-white rounded-lg' onClick={showPreview?handlePost:handleSubmit}>{showPreview?"Upload":"Submit"}</button>
 				<button className='px-3 py-2 my-2 w-full bg-red-500 text-white rounded-lg' onClick={handleClose}>Close</button>
 			</div>
 			
