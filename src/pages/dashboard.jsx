@@ -7,6 +7,7 @@ import { FaAngleDoubleRight,FaBell } from "react-icons/fa";
 import { Avatar} from 'antd';
 import BatchWiseAnalytics from "../components/dashboard/batchWiseAnalytics";
 import Assignment from "../components/assignment/assignment";
+import Assessment from "../components/assessment/Assessment"
 
 
 
@@ -25,7 +26,7 @@ export default function Dashboard(){
                 <BatchWiseAnalytics />
               </div>
               <div className={showCard=="Assessments"?"":"hidden "}>
-                {/* <Assessments setShowSideBar={setShowSideBar}/> */}
+                 <Assessment />
               </div>
               <div className={showCard=="Assignments"?"":"hidden "}>
                 <Assignment />

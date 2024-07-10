@@ -22,7 +22,7 @@ const BatchWiseAnalytics = () => {
       const bacthData = await axios.get("/");
       const totalStudends = await axios.get("/studentTotal");
       const topPerformer = await axios.get("/topPerformers");
-      // const universityname =await axios.get("/universityname");
+      const universityname =await axios.get("/universityname");
       
       setLoading(false)
       setBatchWiseData(bacthData.data);
@@ -39,7 +39,7 @@ const BatchWiseAnalytics = () => {
     loadData();
   }, []); // Empty dependency array to fetch data once on mount
 
-  console.log("batchWiseData:", batchWiseData); // Log batchWiseData for debugging
+  // console.log("batchWiseData:", batchWiseData); // Log batchWiseData for debugging
 
   return (
       <div className="px-5 py-3 flex flex-col justify-center items-center">
