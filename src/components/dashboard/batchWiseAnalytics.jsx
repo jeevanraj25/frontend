@@ -59,7 +59,7 @@ const BatchWiseAnalytics = () => {
             </div>
           </div>
           <div className="ml-7 px-5 w-[30%]">
-            <div className="py-2">
+            <div className="py-2 ">
               <TotalStudents total={totalStudent} />
             </div>
             <div className="py-2">

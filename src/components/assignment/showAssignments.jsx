@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import img from "../../assets/images/noAssignment.jpg"
 import axios from '../../api/axios'
 import AssignmentCard from './assignmentCard'
+import useContextApi from '../../contextAPI/useContextApi'
 const ShowAssignments = () => {
 
-    const [assignments, setAssignments] = useState([])
-    const [isAssignment, setIsAssignment] = useState(false)
+    const {assignments,setAssignments,isAssignment,setIsAssignment,loadAssignment,setLoadAssignment} = useContextApi()
     const loadAssignments = async() => {
         try{
             const res = await axios.get("/assignments")
@@ -17,6 +17,7 @@ const ShowAssignments = () => {
                 setIsAssignment(false)
                 console.log(res.data.message);
             }
+            setLoadAssignment(false)
         }
         catch(err){
             console.log(err);
@@ -25,7 +26,7 @@ const ShowAssignments = () => {
 
     useEffect(()=>{
         loadAssignments()
-    },[assignments])
+    },[loadAssignment])
     return (
         <div className="flex flex-col justify-center items-start p-5 w-[90%] mt-6 h-auto border-2 rounded-md shadow-lg mx-auto">
             <div className='flex justify-center items-center mx-auto'>

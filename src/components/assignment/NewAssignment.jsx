@@ -3,8 +3,10 @@ import {useEffect, useState} from 'react'
 import CSVReader from 'react-csv-reader'
 import { toast } from 'react-toastify'
 import AssignmentUploadTemplate from './assignmentUploadTemplate'
+import useContextApi from '../../contextAPI/useContextApi'
 
 const NewAssignment = ({ isOpen, setIsOpen }) => {
+	const {setLoadAssignment} = useContextApi()
 	const [csvData, setCsvData] = useState(null)
 	const initialData = {
 		title:"",
@@ -77,6 +79,7 @@ const NewAssignment = ({ isOpen, setIsOpen }) => {
 				error: 'Rejected 🤯'
 			}
 		)
+		setLoadAssignment(true)
 		handleClose()
 	}
 	catch(err){
