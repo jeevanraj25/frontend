@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { IoMdClose } from "react-icons/io";
 const AssignmentPreviewTemplate = ({  assignment, setShowPreview }) => {
     
 
@@ -65,8 +65,8 @@ const AssignmentPreviewTemplate = ({  assignment, setShowPreview }) => {
         <div className='fixed inset-0 z-50 flex items-center justify-center text-xl overflow-x-hidden overflow-y-auto outline-none focus:outline-none bg-gray-500 bg-opacity-75'>
             <div className="relative  mx-auto my-6 h-[90vh]" >
             <div className='p-3 flex justify-center items-center bg-white rounded-md'>
-            <div className='absolute top-3 right-5'>
-                <button onClick={() => setShowPreview(false)} className='font-semibold text-xl text-black hover:bg-red-500 rounded-md hover:text-white px-2 py-1'>X</button>
+            <div className='absolute top-3 right-4'>
+                <button onClick={() => setShowPreview(false)} className='font-semibold text-3xl text-red-500  rounded-md px-2 py-1'><IoMdClose /></button>
             </div>
             <form onSubmit={handleSubmit} className='flex flex-col bg-white border-2 shadow-lg rounded-md max-w-[1024px] w-max m-10 p-3'>
                 <h1 className='text-3xl font-bold text-center p-3'>Assignment</h1>

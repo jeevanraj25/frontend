@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import useContextApi from '../../contextAPI/useContextApi';
 
-const WelcomeCard = ({ universityName, trainerName }) => {
+const WelcomeCard = ({ trainerName }) => {
+  const {university} = useContextApi()
   useEffect(() => {
     const letters = document.querySelectorAll('.letter');
     letters.forEach((letter, index) => {
@@ -24,7 +26,14 @@ const WelcomeCard = ({ universityName, trainerName }) => {
         </h1>
         <div className="flex items-center w-full px-5">
           <div className="w-1/2">
-            <h2 className="text-2xl">Institute name: {universityName}</h2>
+            <h2 className="text-2xl ml-1">Select Institute</h2>
+            <select className='text-2xl font-semibold'>
+              {university.map((value,index) => {
+                return(
+                  <option onSelect={() => console.log(value.id)} key={index}>{value.name}</option>
+                )
+              })}
+            </select>
           </div>
           <div className="w-1/2 flex justify-end">
             <p className="text-lg font-semibold">Select Year:</p>

@@ -13,7 +13,6 @@ const BatchWiseAnalytics = () => {
   const [totalStudent, setTotalStudent] = useState(0);
   const [topPerformers, setTopPerformers] = useState([]);
   const [totalBatch, setTotalBatch] = useState(0)
-  const [universityName,setUniversityName] =useState("");
   const [loading, setLoading] = useState(false)
 
   const loadData = async () => {
@@ -29,7 +28,6 @@ const BatchWiseAnalytics = () => {
       setTotalStudent(totalStudends.data.total);
       setTopPerformers(topPerformer.data);
       setTotalBatch(bacthData.data.assessmentsArray[0].labels.length)
-      setUniversityName(universityname.data.data);
     } catch (err) {
       console.error("Error fetching data:", err);
     }
@@ -46,7 +44,7 @@ const BatchWiseAnalytics = () => {
         {loading? <Loading /> : (
           <>
         <div className="flex flex-1 w-[90%]  py-2 mx-auto my-4 h-screen">
-          <WelcomeCard universityName = {universityName} trainerName={"Trainer Name"}/>
+          <WelcomeCard trainerName={"Trainer Name 👋"}/>
         </div>
         <div className="flex flex-1 p-5 w-[90%] h-auto border rounded-md shadow-lg mx-auto">
           <div className="flex flex-col w-[68%] h-auto items-center justify-center mx-auto">

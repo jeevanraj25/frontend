@@ -5,8 +5,8 @@ const AssignmentCard = ({assignment,index}) => {
     const formattedDate = new Date(assignment.endDate).toLocaleDateString();
     const [showPreview, setShowPreview] = useState(false)
     return (
-    <div className='flex flex-col justify-center items-center border-2 shadow-md rounded-md px-3 py-2 '>
-        <div className='mx-5'>
+    <div className='flex flex-col justify-center items-center bg-gradient-to-b from-[#004AAD] via-[#004AAD] via-50% to-[#62B8BD]  border-2 shadow-md rounded-3xl px-3 py-2 '>
+        <div className='mx-7 text-white mt-3'>
             <h1 className='font-bold text-2xl py-3'>Assignment No. {index+1}</h1>
             <h2 className='font-semibold text-xl py-2'>Title : {assignment.title}</h2>
             <h2 className='font-semibold text-xl py-2'>End Date : {formattedDate}</h2>

@@ -4,6 +4,9 @@ import CSVReader from 'react-csv-reader'
 import { toast } from 'react-toastify'
 import AssignmentUploadTemplate from './assignmentUploadTemplate'
 import useContextApi from '../../contextAPI/useContextApi'
+import { IoMdClose } from "react-icons/io";
+import { FaFileUpload } from "react-icons/fa";
+import { IoIosBackspace } from "react-icons/io";
 
 const NewAssignment = ({ isOpen, setIsOpen }) => {
 	const {setLoadAssignment} = useContextApi()
@@ -102,11 +105,13 @@ const NewAssignment = ({ isOpen, setIsOpen }) => {
 	<div className="relative w-auto max-w-lg mx-auto my-6 h-[80vh]" >
 	<div className='p-3 flex justify-center items-center'>
 		<div className='p-3 flex flex-col bg-white font-semibold border-2 w-auto min-h-[50vh] h-auto rounded-lg'>
-			
+		<div className='flex justify-end items-end ml-auto'>
+		<button className='px-2 py-1 my-2 text-3xl font-bold  text-red-500  rounded-lg' onClick={handleClose}><IoMdClose /></button>
+		</div>
 			{showPreview && <AssignmentUploadTemplate csvData = {csvData} data = {data}  />}
 			
-			<div className={`${showPreview?"hidden":""}`}>
-			<h1 className='text-2xl text-center mb-2'>Assignment Details</h1>
+			<div className={`${showPreview?"hidden":""} `}>
+			<h1 className='text-2xl text-center mb-5'>Assignment Details</h1>
 			<div className='flex flex-col px-2 py-1'>
 				<label className='py-1'>Enter Assignment Title</label>
 				<input name="title" type='text' className={`p-1 border-2 rounded-lg my-1 ${formError.title?"border-red-500":""}`} placeholder='Title' value={data.title} onChange={handleChange} />
@@ -136,8 +141,8 @@ const NewAssignment = ({ isOpen, setIsOpen }) => {
 			</div>
 			</div>
 			<div className='flex flex-col px-2'>
-				<button className='px-3 py-2 my-2 bg-[#009eb0] text-white rounded-lg' onClick={showPreview?handlePost:handleSubmit}>{showPreview?"Upload":"Submit"}</button>
-				<button className='px-3 py-2 my-2 w-full bg-red-500 text-white rounded-lg' onClick={handleClose}>Close</button>
+				<button className='px-3 py-2 my-2 bg-[#009eb0] text-white rounded-lg' onClick={showPreview?handlePost:handleSubmit}><span className='flex justify-center items-center gap-2'>{showPreview&&<FaFileUpload />}{showPreview?"Upload":"Submit"}</span></button>
+				{showPreview&&<button className='px-3 py-2 my-2 bg-[#009eb0] text-white rounded-lg' onClick={() => setShowPreview(false)}><span className='flex justify-center items-center gap-2'><IoIosBackspace />Back</span></button>}
 			</div>
 			
 		</div>

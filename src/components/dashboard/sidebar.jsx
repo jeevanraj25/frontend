@@ -66,4 +66,4 @@ export default function Sidebar({showCard, setShowCard})
             </motion.div>
         </>
     );
-}   
+}     
