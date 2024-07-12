@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import useContextApi from '../../contextAPI/useContextApi';
 
-const WelcomeCard = ({ trainerName }) => {
-  const {university} = useContextApi()
+const WelcomeCard = () => {
+  const {university,userName} = useContextApi()
   useEffect(() => {
     const letters = document.querySelectorAll('.letter');
     letters.forEach((letter, index) => {
@@ -17,7 +17,7 @@ const WelcomeCard = ({ trainerName }) => {
         <h1 className="font-bold text-5xl px-4 mb-5">
           Welcome{' '}
           <span className="text-[#009eb0]">
-            {trainerName.split('').map((char, index) => (
+            {userName.split('').map((char, index) => (
               <span key={index} className="letter opacity-0">
                 {char}
               </span>

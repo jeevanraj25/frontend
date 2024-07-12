@@ -8,7 +8,7 @@ const ShowAssignments = () => {
     const {assignments,setAssignments,isAssignment,setIsAssignment,loadAssignment,setLoadAssignment} = useContextApi()
     const loadAssignments = async() => {
         try{
-            const res = await axios.get("/assignments")
+            const res = await axios.get("/trainer/assignments")
             if(res.data.status){
                 setAssignments(res.data.assignments);
                 setIsAssignment(true)

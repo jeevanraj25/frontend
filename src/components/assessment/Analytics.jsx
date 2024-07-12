@@ -16,9 +16,9 @@ const Analytics = () => {
   const loadData = async () => {
     try {
       setLoading(true);
-      const communicationData = await axios.get("/communucation");
-      const grammarData = await axios.get("/grammer");
-      const percentileData = await axios.get("/percentile");
+      const communicationData = await axios.get("/trainer/communucation");
+      const grammarData = await axios.get("/trainer/grammer");
+      const percentileData = await axios.get("/trainer/percentile");
 
       setLoading(false);
       setCommunication(communicationData.data);

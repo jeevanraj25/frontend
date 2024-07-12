@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar  from  "../components/dashboard/sidebar";
 // import { Assessments } from "./Assessments";
 import { FaAngleDoubleRight,FaBell } from "react-icons/fa";
@@ -8,14 +8,22 @@ import { Avatar} from 'antd';
 import BatchWiseAnalytics from "../components/dashboard/batchWiseAnalytics";
 import Assignment from "../components/assignment/assignment";
 import Assessment from "../components/assessment/Assessment"
-
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function Dashboard(){
     const [showCard, setShowCard] = useState("Dashboard");
     const [showSideBar, setShowSideBar] = useState(true);
-    
+    const navigate = useNavigate();
+    useEffect(() => {
+      const token = Cookies.get('id');
+      if(!token){
+        navigate("/login")
+      }
+    })
+
     return(
         <>
           <div className="bg-white lg:pl-[20%] w-full lg:block">

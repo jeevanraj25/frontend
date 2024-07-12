@@ -7,6 +7,8 @@ import {motion} from "framer-motion";
 import logo from "../../assets/images/yuvamytr_favicon.svg"
 import Cookies from 'js-cookie' ;
 import { useState } from "react";
+import useContextApi from "../../contextAPI/useContextApi";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -14,24 +16,25 @@ import { useState } from "react";
 
 export default function Sidebar({showCard, setShowCard})
 {
-    
-
+    const navigate = useNavigate()
+    const {setIsLogOut} = useContextApi()
 
     const handleLogout = () => {
-        // console.log("Before Deletion:", document.cookie);
+        console.log("Before Deletion:", document.cookie);
     
-        // // Remove the "authToken" cookie
-        // Cookies.remove("authToken");
+        // Remove the "authToken" cookie
+        Cookies.remove("authToken");
+        Cookies.remove("id")
     
-        // console.log("After Deletion:", document.cookie);
+        console.log("After Deletion:", document.cookie);
     
-        // // Update the state to reflect the logout status
-        // setIsLogOut(true);
+        // Update the state to reflect the logout status
+        setIsLogOut(true);
     
-        // // Redirect to the login page after a short delay
-        // setTimeout(() => {
-        //   navigate("/login");
-        // }, 100);  // Adjust the delay as needed
+        // Redirect to the login page after a short delay
+        setTimeout(() => {
+          navigate("/login");
+        }, 100);  // Adjust the delay as needed
       };
     
     const [showSideBar, setShowSideBar] = useState(true)

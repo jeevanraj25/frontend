@@ -75,7 +75,7 @@ const NewAssignment = ({ isOpen, setIsOpen }) => {
 		}
 		console.log(newAssignment);
 		const res = await toast.promise(
-			axios.post("/createAssignment",newAssignment),
+			axios.post("/trainer/createAssignment",newAssignment),
 			{
 				pending: 'Uploading',
 				success: 'Uploaded Successfully',

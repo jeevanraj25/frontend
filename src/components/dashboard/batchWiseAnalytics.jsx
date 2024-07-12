@@ -6,7 +6,7 @@ import TopPerfromers from "./topPerfromers";
 import WelcomeCard from "./welcomeCard";
 import TotalBatches from "./totalBatches";
 import Loading from "../loading/Loading";
-
+import useContextApi from "../../contextAPI/useContextApi";
 
 const BatchWiseAnalytics = () => {
   const [batchWiseData, setBatchWiseData] = useState({});
@@ -14,27 +14,30 @@ const BatchWiseAnalytics = () => {
   const [topPerformers, setTopPerformers] = useState([]);
   const [totalBatch, setTotalBatch] = useState(0)
   const [loading, setLoading] = useState(false)
-
+  const {setUserName} = useContextApi()
   const loadData = async () => {
     try {
       setLoading(true)
-      const bacthData = await axios.get("/");
-      const totalStudends = await axios.get("/studentTotal");
-      const topPerformer = await axios.get("/topPerformers");
-      const universityname =await axios.get("/universityname");
-      
+      const bacthData = await axios.get("/trainer");
+      const totalStudends = await axios.get("/trainer/studentTotal");
+      const topPerformer = await axios.get("/trainer/topPerformers");
+      const universityname =await axios.get("/trainer/universityname");
+      const userDetails = await axios.get("/trainer/user")
       setLoading(false)
       setBatchWiseData(bacthData.data);
       setTotalStudent(totalStudends.data.total);
       setTopPerformers(topPerformer.data);
       setTotalBatch(bacthData.data.assessmentsArray[0].labels.length)
+      setUserName(`${userDetails.data.name} 👋`)
     } catch (err) {
       console.error("Error fetching data:", err);
     }
   };
 
   useEffect(() => {
+    
     loadData();
+
   }, []); // Empty dependency array to fetch data once on mount
 
   // console.log("batchWiseData:", batchWiseData); // Log batchWiseData for debugging
@@ -44,7 +47,7 @@ const BatchWiseAnalytics = () => {
         {loading? <Loading /> : (
           <>
         <div className="flex flex-1 w-[90%]  py-2 mx-auto my-4 h-screen">
-          <WelcomeCard trainerName={"Trainer Name 👋"}/>
+          <WelcomeCard />
         </div>
         <div className="flex flex-1 p-5 w-[90%] h-auto border rounded-md shadow-lg mx-auto">
           <div className="flex flex-col w-[68%] h-auto items-center justify-center mx-auto">
